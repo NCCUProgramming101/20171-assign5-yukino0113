@@ -547,6 +547,7 @@ boolean isHit(float ax, float ay, float aw, float ah, float bx, float by, float 
 
 String convertFramesToTimeString(int frames ) {	// Requirement #4
   int seconds = frames/60;
+  println(seconds/60);
   return ( nf(seconds/60, 2)  + ":" + nf(seconds%60, 2));
 }
 
