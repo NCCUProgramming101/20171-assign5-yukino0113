@@ -527,27 +527,9 @@ void drawTimerUI() {
   text(timeString, 3, height + 3);
 
   // Actual Time Text
-  if(gameTimer/60 >= 120){
-   color timeTextColor = #00ffff; 
-   fill(timeTextColor);
-  text(timeString, 0, height);
-  }else if(gameTimer/60 >= 60 && gameTimer/60 < 120){
-  color timeTextColor = #ffffff; 		// Requirement #5: Get the correct color using color getTimeTextColor(int frames)
+  color timeTextColor = getTimeTextColor(gameTimer); 		// Requirement #5: Get the correct color using color getTimeTextColor(int frames)
   fill(timeTextColor);
   text(timeString, 0, height);
-  }else if(gameTimer/60 >= 30 && gameTimer/60 < 60){
-   color timeTextColor = #ffcc00; 
-  fill(timeTextColor);
-  text(timeString, 0, height); 
-  }else if(gameTimer/60 >= 10 && gameTimer/60 < 30){
-   color timeTextColor = #ff6600; 
-  fill(timeTextColor);
-  text(timeString, 0, height);
-  }else if(gameTimer/60 < 10){
-   color timeTextColor = #ff0000; 
-  fill(timeTextColor);
-  text(timeString, 0, height);
-  }
 }
 
 void addTime(float seconds) {					// Requirement #2
@@ -569,7 +551,17 @@ String convertFramesToTimeString(int frames ) {	// Requirement #4
 }
 
 color getTimeTextColor(int frames) {				// Requirement #5
-  return #ffffff;
+  if (gameTimer/60 >= 120) {
+    return #00ffff;
+  } else if (gameTimer/60 >= 60 && gameTimer/60 < 120) {
+    return #ffffff;
+  } else if (gameTimer/60 >= 30 && gameTimer/60 < 60) {
+    return #ffcc00;
+  } else if (gameTimer/60 >= 10 && gameTimer/60 < 30) {
+    return #ff6600;
+  } else {
+    return #ff0000;
+  }
 }
 
 int getEnemyIndexByRow(int row) {				// Requirement #6
