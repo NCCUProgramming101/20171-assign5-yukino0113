@@ -584,7 +584,6 @@ int getEnemyIndexByRow(int row) {				// Requirement #6
 void drawCaution() {								// Requirement #6
 
   // Draw a caution sign above the enemy under the screen using int getEnemyIndexByRow(int row)
-  println(getEnemyIndexByRow(playerRow));
   for (int i = 0; i < soldierX.length; i++) {
     if (getEnemyIndexByRow(playerRow) == i ) {
       image(caution, soldierX[i], soldierY[i] - SOIL_SIZE);
