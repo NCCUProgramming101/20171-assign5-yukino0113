@@ -441,10 +441,10 @@ void draw() {
           playerMoveTimer = 0;
         }
       }
-    }
-
+    }  
     // Requirement #6:
     //   Call drawCaution() to draw caution sign
+    drawCaution();
 
     popMatrix();
 
@@ -547,17 +547,17 @@ boolean isHit(float ax, float ay, float aw, float ah, float bx, float by, float 
 
 String convertFramesToTimeString(int frames ) {	// Requirement #4
   int seconds = frames/60;
-  return ( nf(floor(seconds/60), 2)  + ":" + nf(floor(seconds%60), 2));
+  return ( nf(seconds/60, 2)  + ":" + nf(seconds%60, 2));
 }
 
 color getTimeTextColor(int frames) {				// Requirement #5
   if (gameTimer/60 >= 120) {
     return #00ffff;
-  } else if (gameTimer/60 >= 60 && gameTimer/60 < 120) {
+  } else if (frames/60 >= 60 && gameTimer/60 < 120) {
     return #ffffff;
-  } else if (gameTimer/60 >= 30 && gameTimer/60 < 60) {
+  } else if (frames/60 >= 30 && gameTimer/60 < 60) {
     return #ffcc00;
-  } else if (gameTimer/60 >= 10 && gameTimer/60 < 30) {
+  } else if (frames/60 >= 10 && gameTimer/60 < 30) {
     return #ff6600;
   } else {
     return #ff0000;
@@ -570,14 +570,26 @@ int getEnemyIndexByRow(int row) {				// Requirement #6
   // - If there's a soldier in that row, return that soldier's index in soldierX/soldierY
   // (for example, if soldierY[3] is in that row, return 3)
   // - Return -1 if there's no soldier in that row
-
-  return -1;
+  for( int i = 0; i < soldierX.length ; i++){
+    if ((row + 5) * SOIL_SIZE == soldierY[i]) {
+      return i;
+    }
+  }
+    return -1;
+  
 }
+
+
 
 void drawCaution() {								// Requirement #6
 
   // Draw a caution sign above the enemy under the screen using int getEnemyIndexByRow(int row)
-
+  println(getEnemyIndexByRow(playerRow));
+  for (int i = 0; i < soldierX.length; i++) {
+    if (getEnemyIndexByRow(playerRow) == i ) {
+      image(caution, soldierX[i], soldierY[i] - SOIL_SIZE);
+    }
+  }
   // HINT:
   // - Use playerRow to calculate the row below the screen
   // - Use the returned value from int getEnemyIndexByRow(int row) to get the soldier's position from soldierX/soldierY arrays
