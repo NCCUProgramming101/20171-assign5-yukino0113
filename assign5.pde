@@ -547,17 +547,17 @@ boolean isHit(float ax, float ay, float aw, float ah, float bx, float by, float 
 
 String convertFramesToTimeString(int frames ) {	// Requirement #4
   int seconds = frames/60;
-  return ( nf(seconds/60, 2)  + ":" + nf(seconds%60, 2));
+  return ( nf (floor(seconds/60), 2)  + ":" + nf ( floor(seconds%60), 2));
 }
 
 color getTimeTextColor(int frames) {				// Requirement #5
   if (gameTimer/60 >= 120) {
     return #00ffff;
-  } else if (frames/60 >= 60 && gameTimer/60 < 120) {
+  } else if (frames/60 >= 60 && frames/60 < 120) {
     return #ffffff;
-  } else if (frames/60 >= 30 && gameTimer/60 < 60) {
+  } else if (frames/60 >= 30 && frames/60 < 60) {
     return #ffcc00;
-  } else if (frames/60 >= 10 && gameTimer/60 < 30) {
+  } else if (frames/60 >= 10 && frames/60 < 30) {
     return #ff6600;
   } else {
     return #ff0000;
